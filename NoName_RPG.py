@@ -9,60 +9,37 @@ if chara_race == 'High Elf' or chara_race == 'Wood Elf' or chara_race == 'Dark E
 else :
     age = random.randint(18, 45)
 
-#### Stats
-while True :
-    chara_str = random.randint(1, 5)
-    chara_def = random.randint(1, 5)
-    chara_dex = random.randint(1, 5)
-    chara_int = random.randint(1, 5)
-    chara_fth = random.randint(1, 5)
-    chara_cha = random.randint(1, 5)
-    chara_lck = random.randint(1, 5)
-    total_stats = chara_str + chara_def + chara_dex + chara_int + chara_fth + chara_cha + chara_lck
-    if not total_stats == 20 :
-        continue
-    else :
+#### Stats - sorteia valores aleatórios p/ as stats e cria um dict
+attributes=dict()
+lst_attributes=['str','def','dex','int','fth','cha','lck']
+while True:
+    att_count=0
+    count=0
+    for att in lst_attributes:
+        attributes[att]=random.randint(1, 5)
+        count+=attributes[att]
+        att_count+=1
+ #       print('debug:',count)
+    if att_count==7 and count==20:
         break
+print('debug', attributes)
 
-# Somar os bônus de cada classe aos atributos sorteados com randint
+# Sorteia a classe
 
-jobs = ['Warrior', 'Mage', 'Archer']
-chara_job = random.choice(jobs)
+warrior_stats = {'Warrior': 0, 'str': 10, 'def': 1, 'dex': 1, 'int': 1, 'fth': 1, 'cha': 1, 'lck': 1}
+mage_stats = {'Mage': 0, 'str': 1, 'def': 1, 'dex': 1, 'int': 10, 'fth': 1, 'cha': 1, 'lck': 1}
+archer_stats = {'Archer': 0, 'str': 1, 'def': 1, 'dex': 10, 'int': 1, 'fth': 1, 'cha': 1, 'lck': 1}
+jobs=warrior_stats, mage_stats, archer_stats
+chara_job = random.choice(jobs) #Sorteei os dict de bonus da classe direto, com o primeiro item sendo o nome da classe.
 
-warrior_stats = {'bstr': 10, 'bdef': 1, 'bdex': 1, 'bint': 1, 'bfth': 1, 'bcha': 1, 'blck': 1}
-mage_stats = {'bstr': 1, 'bdef': 1, 'bdex': 1, 'bint': 10, 'bfth': 1, 'bcha': 1, 'blck': 1}
-archer_stats = {'bstr': 1, 'bdef': 1, 'bdex': 10, 'bint': 1, 'bfth': 1, 'bcha': 1, 'blck': 1}
+#print('debug class:',list(chara_job.keys())[0]) # Retorna e dá print na primeira key do dict
 
-job_stats = dict()
-
-if chara_job == 'Warrior' :
-    job_stats = warrior_stats
-elif chara_job == 'Mage' :
-    job_stats = mage_stats
-elif chara_job == 'Archer' :
-    job_stats = archer_stats
-
-chara_str+=job_stats['bstr']
-chara_def+=job_stats['bdef']
-chara_dex+=job_stats['bdex']
-chara_int+=job_stats['bint']
-chara_fth+=job_stats['bfth']
-chara_cha+=job_stats['bcha']
-chara_lck+=job_stats['blck']
-
+for att_bonus,value in chara_job.items():
+    attributes[att_bonus]=attributes.get(att_bonus,0)+value #Procura pelo att_bonus no dict de att e soma o valor dos dois
+    print('debug', att_bonus, attributes[att_bonus])
 
 #### Character ####
 print('Name: Generic Name') #### Sortear em uma lista de nomes. O nome deve ser baseado na raça do personagem.
 print('Race: {}'.format(chara_race))
-print('Job: {}'.format(chara_job))
+print('Job: {}'.format(list(chara_job.keys())[0]))  # Dá print na primeira key do dict chara_job, que é a classe.
 print('Age: {}'.format(age))
-
-print("""STR: {}
-DEF: {}
-DEX: {}
-INT: {}
-FTH: {}
-CHA: {}
-LCK: {}""".format(chara_str, chara_def, chara_dex, chara_int, chara_fth, chara_cha, chara_lck))
-
-print('Debug Total Stats: {}'.format(total_stats))
