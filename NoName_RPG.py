@@ -33,14 +33,14 @@ warrior_stats = {'bstr': 10, 'bdef': 1, 'bdex': 1, 'bint': 1, 'bfth': 1, 'bcha':
 mage_stats = {'bstr': 1, 'bdef': 1, 'bdex': 1, 'bint': 10, 'bfth': 1, 'bcha': 1, 'blck': 1}
 archer_stats = {'bstr': 1, 'bdef': 1, 'bdex': 10, 'bint': 1, 'bfth': 1, 'bcha': 1, 'blck': 1}
 
+job_stats = dict()
+
 if chara_job == 'Warrior' :
     job_stats = warrior_stats
 elif chara_job == 'Mage' :
     job_stats = mage_stats
 elif chara_job == 'Archer' :
     job_stats = archer_stats
-
-job_stats = dict()
 
 chara_str+=job_stats['bstr']
 chara_def+=job_stats['bdef']
