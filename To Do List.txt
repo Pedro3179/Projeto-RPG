@@ -1,0 +1,5 @@
+Weak 2
+
+- Ask for the character’s name (pressing enter repeats)
+- Ask for the class (pressing enter makes it random)
+

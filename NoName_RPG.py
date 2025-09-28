@@ -1,6 +1,21 @@
-import random
+import random, re
 
-#### List of Races
+print('''------------------------------------------------------------
+      ----------------------------------------------------
+          ---- Bem Vindo a Criador de Personagem! ----
+      ----------------------------------------------------
+------------------------------------------------------------ 
+''')
+
+# Ask for a valid character name
+val=False
+
+while val==False:
+    chara_name=input('Enter the character name: ')
+    if re.fullmatch(r'[A-Za-z0-9 ]+',chara_name):
+        val=True
+
+#### List of Races ####
 races = ['Human', 'High Elf', 'Wood Elf', 'Dark Elf', 'Dwarf', 'Beastfolk', 'Orc', 'Goblin', 'Minotaur', 'Centaur', 'Faery']
 chara_race = random.choice(races)
 
@@ -9,7 +24,7 @@ if chara_race == 'High Elf' or chara_race == 'Wood Elf' or chara_race == 'Dark E
 else :
     age = random.randint(18, 45)
 
-#### Stats - sorteia valores aleatórios p/ as stats e cria um dict
+#### Stats #### - Assign random values to the stat and create dictionaries
 attributes=dict()
 lst_attributes=['str','def','dex','int','fth','cha','lck']
 while True:
@@ -24,22 +39,20 @@ while True:
         break
 print('debug', attributes)
 
-# Sorteia a classe
-
+# Pick a class bonus dictionary randomly, with the first item of each dict being the name of the class
 warrior_stats = {'Warrior': 0, 'str': 10, 'def': 1, 'dex': 1, 'int': 1, 'fth': 1, 'cha': 1, 'lck': 1}
 mage_stats = {'Mage': 0, 'str': 1, 'def': 1, 'dex': 1, 'int': 10, 'fth': 1, 'cha': 1, 'lck': 1}
 archer_stats = {'Archer': 0, 'str': 1, 'def': 1, 'dex': 10, 'int': 1, 'fth': 1, 'cha': 1, 'lck': 1}
 jobs=warrior_stats, mage_stats, archer_stats
-chara_job = random.choice(jobs) #Sorteei os dict de bonus da classe direto, com o primeiro item sendo o nome da classe.
+chara_job = random.choice(jobs)
 
-#print('debug class:',list(chara_job.keys())[0]) # Retorna e dá print na primeira key do dict
-
+# Search for the att_bonus in the attributes dictionary and sum both values
 for att_bonus,value in chara_job.items():
-    attributes[att_bonus]=attributes.get(att_bonus,0)+value #Procura pelo att_bonus no dict de att e soma o valor dos dois
+    attributes[att_bonus]=attributes.get(att_bonus,0)+value
     print('debug', att_bonus, attributes[att_bonus])
 
 #### Character ####
-print('Name: Generic Name') #### Sortear em uma lista de nomes. O nome deve ser baseado na raça do personagem.
+print('Name: {}'.format(chara_name))
 print('Race: {}'.format(chara_race))
-print('Job: {}'.format(list(chara_job.keys())[0]))  # Dá print na primeira key do dict chara_job, que é a classe.
+print('Job: {}'.format(list(chara_job.keys())[0])) # Print the first key in the chara_job dict, which is class.
 print('Age: {}'.format(age))
